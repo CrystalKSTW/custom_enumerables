@@ -63,4 +63,54 @@ module Enumerable
         end
         return bool
       end
+
+      def my_any?
+        index = 0
+        bool = false
+        if block_given?
+          self.length.times do 
+            if yield(self[index]) && yield(self[index]) != nil
+              bool = true
+              break
+            else
+            index += 1
+            end
+          end
+        else
+          self.length.times do
+            if self[index] && self[index] != nil
+              bool = true
+              break
+            else
+              index += 1
+            end
+          end
+        end
+        return bool
+      end
+    
+      def my_none?
+        index = 0
+        bool = true
+        if block_given?
+          self.length.times do
+            if yield(self[index]) && yield(self[index]) != nil
+              bool = false
+              break
+            else
+              index += 1
+            end
+          end
+        else
+          self.length.times do
+            if self[index] && self[index] != nil
+              bool = false
+              break
+            else 
+              index += 1
+            end
+          end
+        end
+        return bool
+      end
 end
