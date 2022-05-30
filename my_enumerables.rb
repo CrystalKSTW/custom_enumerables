@@ -11,4 +11,31 @@ module Enumerable
           return to_enum(:self)
         end
       end
+
+      def my_each_with_index
+        index = 0
+        if block_given?
+          self.length.times do 
+            yield(self[index], index)
+            index+=1
+          end
+          return self
+        else
+          return to_enum(:self)
+        end
+      end
+
+      def my_select
+        index = 0
+        new_arr = []
+        if block_given?
+          self.length.times do 
+            if yield(self[index]) then new_arr.push(self[index]) end
+            index+=1
+          end
+          return new_arr
+        else
+          return to_enum(:self)
+        end
+      end
 end
