@@ -38,4 +38,29 @@ module Enumerable
           return to_enum(:self)
         end
       end
+
+      def my_all?
+        index = 0
+        bool = true
+        if block_given?
+          self.length.times do 
+            if yield(self[index]) && yield(self[index]) != nil
+            index += 1
+            else
+              bool = false
+              break
+            end
+          end
+        else
+          self.length.times do 
+            if self[index] && self[index] != nil
+              index += 1
+            else
+              bool = false
+              break
+            end
+          end
+        end
+        return bool
+      end
 end
